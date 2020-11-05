@@ -1,5 +1,4 @@
 import React from 'react';
-
 class Task extends React.Component {
     constructor(props) {
         super(props);
@@ -7,10 +6,10 @@ class Task extends React.Component {
     render() {
         return (
           <div>
-            <p>Hello World!</p>
+            <p>Task Name</p>
+            <p>Remaining Time: 00ms</p>
           </div>
         )
       }
-    
 }
 export default Task;
