@@ -6,7 +6,7 @@ class Task extends React.Component {
     render() {
         return (
           <div>
-            <p>Task Name</p>
+            <p>Task Name: {this.props.name}</p>
             <p>Remaining Time: 00ms</p>
           </div>
         )

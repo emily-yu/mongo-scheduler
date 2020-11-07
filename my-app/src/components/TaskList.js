@@ -7,8 +7,8 @@ class TaskList extends React.Component {
     render() {
         return (
           <div>
-            <Task/>
-            <Task/>
+            <Task name="asdf"/>
+            <Task name="asdf2"/>
           </div>
         )
       }
