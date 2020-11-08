@@ -7,8 +7,8 @@ class TaskList extends React.Component {
     render() {
         return (
           <div>
-            <Task name="asdf"/>
-            <Task name="asdf2"/>
+            <Task name="asdf" timeRemaining="200"/>
+            <Task name="asdf2" timeRemaining="2000"/>
           </div>
         )
       }
