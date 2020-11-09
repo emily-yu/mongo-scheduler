@@ -14,18 +14,28 @@ const app = new Realm.App({ id: REALM_APP_ID });
 
 // Create a component that displays the given user's details
 function UserDetail({ user }) {
+  console.log(user)
+  const logout = async() => {
+    console.log("asdf")
+    user.logOut();
+  }
   return (
     <div>
       <h1>Logged in with anonymous id: {user.id}</h1>
+      <button onClick={logout}>Logout</button>
     </div>
   );
 }
 
+let user;
+console.log(user)
 // Create a component that lets an anonymous user log in
 function Login({ setUser }) {
+  console.log(user)
   const loginAnonymous = async () => {
-    const user = await app.logIn(Realm.Credentials.anonymous());
+    user = await app.logIn(Realm.Credentials.anonymous());
     setUser(user);
+
   };
   return <button onClick={loginAnonymous}>Log In</button>;
 }
