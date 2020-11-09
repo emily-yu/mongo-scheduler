@@ -1,12 +1,17 @@
+project description
+the main functionality is clicking a button and scheduling an alert x seconds later.
+the project will save the data to mongodb atlas, such that the data is maintained on there. 
+
 instructions
 
+setup for template
 1
 https://reactjs.org/docs/create-a-new-react-app.html
 npx create-react-app my-app
 cd my-app
 npm start
 
-
+lets clean the template out and get the application framework ready for usage!
 2
 clear out old assets to have a clean slate
 
@@ -65,3 +70,6 @@ return (
 );
 
 if you reload, voila - there's a clean page with hello world!
+
+time to add content or osmething
+1 
