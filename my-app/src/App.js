@@ -30,7 +30,6 @@ class App extends React.Component{
       <div className="App">
           <TaskCreator addTask={this.addTask}/>
           <TaskList tasks={this.state.tasks}/>
-          <Child number={2}/>
       </div>
     );
   }
