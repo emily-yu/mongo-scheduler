@@ -36,6 +36,12 @@ function Login({ setUser }) {
     user = await app.logIn(Realm.Credentials.anonymous());
     setUser(user);
 
+    const mongo = app.services.mongodb("mongodb-atlas");
+    const mongoCollection = mongo.db("sample_airbnb").collection("listingsAndReviews");
+
+    const queryFilter = { property_type: "House" };
+    const perennialResultDocument = await mongoCollection.findOne(queryFilter);
+    console.log(perennialResultDocument);
   };
   return <button onClick={loginAnonymous}>Log In</button>;
 }
