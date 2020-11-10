@@ -8,15 +8,28 @@ import React from 'react';
 class App extends React.Component{    
   constructor(props){
        super(props);
-       this.state = { tasks: [] };
-       this.addTask = this.addTask.bind(this)
+
+        // app state - for updating tasklist as tasks are added
+        this.state = {
+          tasks: []
+        };
+
+        // bindings for functions so references don't change on each render
+        this.addTask = this.addTask.bind(this)
+
+       // timer countdown to decrement tasks each second
        this.interval = setInterval(() => {
           for (let [index, task] of this.state.tasks.entries()) {
+            // perform the oepration
             this.state.tasks[index].timeRemaining -= 1
+
+            // if time is completed...
             if (task.timeRemaining <= 0) {
+              // remove the task
               this.state.tasks.pop(index)
             }
-            this.setState(this.state.tasks)
+
+            this.setState(this.state.tasks) // update state = update tasklist
           }
        }, 1000)
   }    
@@ -25,7 +38,6 @@ class App extends React.Component{
     // update tasklist datastructure
     this.state.tasks.push({taskName, timeRemaining})
     this.setState({tasks:this.state.tasks})
-    console.log(this.state.tasks)
 
     // update tasklist item (happens thorough setState)
   }
@@ -38,6 +50,7 @@ class App extends React.Component{
       </div>
     );
   }
+  
 }
 
 export default App;
