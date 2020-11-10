@@ -215,8 +215,59 @@ looks familiar, right? as for the added functions, as a quick review:
 
 that means that for these inputs to work, we'll need to define 2 functions: updateParams() and createTask().
 
-...UPDATEPARAMS()
+to send data to the parent to create a new task (createTask) from TaskCreator, we will need to modify the state of the main App. however, the child component doesn't have access to the parent's state, and the child component can't pass props back upwards to the parent component. 
 
-...CREATETASK()
+to solve this, we do a linkage of the functions from the parent function and the child function. 
 
+before we do anything, lets setup the connections between function and component. 
+1 - create the function headers, outside of the constructor and above the render, in the class body. 
+  createTask() {...}
+  updateParams(event) {...}
+
+2 - create the function bindings, in the constructor. 
+  this.createTask = this.createTask.bind(this);
+  this.updateParams = this.updateParams.bind(this);
+
+...addTask() in App.js [TODO]
+
+...updateParams() in TaskCreator.js
+3 - add the following code to your new function. 
+
+  // check which input field was updated, update state for that field
+  if (event.target.placeholder == "title") {
+      this.setState({
+          // event.target is the caller field
+          // event.target.value is the caller field's value; that is, the user's input in the box
+          taskName: event.target.value
+      })
+  }
+  else { // is duration input field
+      this.setState({
+          timeRemaining: event.target.value
+      })
+  }
+
+the onChange function has details on the event by default, which includes the component input that triggered the event. that means that we can extract the information about the input by referencing the sender of the event, event.target, and taking its value. 
+
+to keep things simple, we create only one function for reading parameters, since both set a state value but just in different parameters. to differentiate, we use conditionals that check the unique property of each input, the placeholder value. 
+
+the state is then set in preparation to send to the parent. 
+
+...CREATETASK() in TaskCreator.js
+the connection between the parent and the state values set by updateParams() is established by createTask(). this function calls the parent-specific function that was passed down, createTask(taskName, timeRemaining) (note the different parameters, it's a different function!) to add the TaskCreator state data to the App state data. 
+
+      // reference the function from App to call function reference
+      this.props.addTask(this.state.taskName, this.state.timeRemaining)
+
+we're going to want to ensure that the fields are both filled, so lets add a null check to ensure that the data is valid. 
+
+    // ensure that both fields are filled out
+    if (this.state.taskName == "" && this.state.timeRemaining == "") {
+        console.log("error")
+    }
+    else {
+        // reference the function from App to call function reference
+        this.props.addTask(this.state.taskName, this.state.timeRemaining)
+    }
+    
 APP.JS COUNTDOWN/DELETION FUNCTIONALITY
