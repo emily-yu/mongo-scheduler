@@ -6,9 +6,15 @@ import TaskCreator from './components/TaskCreator'
 import React from 'react';
 
 function App() {
+  let tasks = [];
+  
+  const addTask = (taskName, timeRemaining) => {
+    console.log(taskName, timeRemaining)
+    // todo: update tasklist component + datastructure
+  }
   return (
     <div className="App">
-        <TaskCreator/>
+        <TaskCreator addTask={addTask}/>
         <TaskList/>
     </div>
   );

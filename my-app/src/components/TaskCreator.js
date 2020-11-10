@@ -7,7 +7,8 @@ class TaskCreator extends React.Component {
     }
 
     createTask() {
-        console.log("asdf")
+        // access task from parent
+        this.props.addTask("asdf", "200")
     }
 
     render() {
