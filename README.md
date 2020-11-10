@@ -229,7 +229,14 @@ before we do anything, lets setup the connections between function and component
   this.updateParams = this.updateParams.bind(this);
 
 ...addTask() in App.js [TODO]
+  addTask = (taskName, timeRemaining) => {    
+    // update tasklist datastructure
+    this.state.tasks.push({taskName, timeRemaining})
+    this.setState({tasks:this.state.tasks})
 
+    // update tasklist item (happens thorough setState)
+  }
+  
 ...updateParams() in TaskCreator.js
 3 - add the following code to your new function. 
 
@@ -271,3 +278,40 @@ we're going to want to ensure that the fields are both filled, so lets add a nul
     }
     
 APP.JS COUNTDOWN/DELETION FUNCTIONALITY
+
+as any timer would, we will want to execute a function every second. to do this, we will utilize the javascript   
+    setInterval(function, timeInterval)
+
+setInterval deals with ms, meaning that 1000ms = 1s. since our input deals with seconds here, we will set the timeInterval to be 1000ms as we'll be updating the time left after every second. 
+
+    setInterval(() {
+      // <logic-to-adjust-time>
+    }, 1000)
+
+since we'll need to update the values of the countdown every second, which pulls from this.state, to update the list of tasks we'll need to setState(...) every second so that the time left will update. add the following code in your constructor for App.js. 
+
+    // timer countdown to decrement tasks each second
+    this.interval = setInterval(() => {
+      for (let [index, task] of this.state.tasks.entries()) {
+        // perform the oepration
+        this.state.tasks[index].timeRemaining -= 1
+
+        // if time is completed...
+        if (task.timeRemaining <= 0) {
+          // remove the task
+          this.state.tasks.pop(index)
+        }
+
+        this.setState(this.state.tasks) // update state = update tasklist
+      }
+    }, 1000)
+
+lets go through this code slowly.
+
+the for-loop iterates over both the index/key and value of that key in the dictionary, by using .entries(), and the values are unpacked by the [ square brackets ] surrounding index and task. from there, all the tasks will need to subtract 1 second from their remaining time. the following code pops the task out of the tasks list if it reaches 0, so that when rerendering the task will effectively be deleted. 
+
+===
+
+congrats - now you should have a fully functional countdown app built in React.js! the source code is located at https://github.com/emily-yu/mongo-scheduler. Feel free to reference it if you get stuck or leave a comment on this tutorial. 
+
+happy hacking
