@@ -12,6 +12,18 @@ class App extends React.Component{
        super(props);
        this.state = { tasks: [], y: 0 };
        this.addTask = this.addTask.bind(this)
+       this.deleteTask = this.deleteTask.bind(this)
+       this.interval = setInterval(() => {
+          console.log("asdf")
+          for (let [index, task] of this.state.tasks.entries()) {
+            console.log(task)
+            task.timeRemaining -= 100
+            if (task.timeRemaining == 0) {
+              this.state.tasks.pop(index)
+            }
+          }
+          this.setState({time: Date.now()})    
+       }, 2000)
   }    
 
   addTask = (taskName, timeRemaining) => {
@@ -22,14 +34,17 @@ class App extends React.Component{
     this.setState({tasks:this.state.tasks})
     console.log(this.state.tasks)
 
-    // update tasklist item
+    // update tasklist item (happens thorough setState)
+  }
+  deleteTask = index => {
+    console.log(index)
   }
 
   render() {
     return (
       <div className="App">
           <TaskCreator addTask={this.addTask}/>
-          <TaskList tasks={this.state.tasks}/>
+          <TaskList tasks={this.state.tasks} deleteTask={this.deleteTask}/>
       </div>
     );
   }
