@@ -3,9 +3,9 @@ import './App.css';
 import Task from './components/Task';
 import TaskList from './components/TaskList'
 import TaskCreator from './components/TaskCreator'
-import React from 'react';
+import React, { Component } from 'react';
 
-class App extends React.Component{    
+class App extends Component {    
   constructor(props){
        super(props);
 
