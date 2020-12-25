@@ -1,9 +1,11 @@
+import React, { Component } from 'react';
+
 import logo from './logo.svg';
 import './App.css';
+
 import Task from './components/Task';
 import TaskList from './components/TaskList'
 import TaskCreator from './components/TaskCreator'
-import React, { Component } from 'react';
 
 class App extends Component {    
   constructor(props){
@@ -15,7 +17,7 @@ class App extends Component {
         };
 
         // bindings for functions so references don't change on each render
-        this.addTask = this.addTask.bind(this)
+        // this.addTask = this.addTask.bind(this)
 
        // timer countdown to decrement tasks each second
        this.interval = setInterval(() => {

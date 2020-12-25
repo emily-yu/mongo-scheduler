@@ -4,9 +4,9 @@ class TaskCreator extends Component {
     constructor(props) {
         super(props);
 
-        // function bindings
-        this.createTask = this.createTask.bind(this);
-        this.updateParams = this.updateParams.bind(this);
+        // function bindings - if not using arrow functions!
+        // this.createTask = this.createTask.bind(this);
+        // this.updateParams = this.updateParams.bind(this);
 
         // keeps track of the data to send upwards to create a new <Task> in main App
         this.state = {
@@ -16,7 +16,7 @@ class TaskCreator extends Component {
     }
 
     // send data upwards to the parent App
-    createTask() {
+    createTask = () => {
         // ensure that both fields are filled out
         if (this.state.taskName == "" && this.state.timeRemaining == "") {
             console.log("error")
@@ -28,7 +28,7 @@ class TaskCreator extends Component {
     }
     
     // update state variables for createTask() to send the data upwards to the App 
-    updateParams(event) {
+    updateParams = (event) => {
         // check which input field was updated, update state for that field
         if (event.target.placeholder == "title") {
             this.setState({
